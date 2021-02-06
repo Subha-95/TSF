@@ -9,7 +9,7 @@
 # 
 # Dataset Link : http://bit.ly/w-data
 # 
-# Github Link: 
+# Github Link: https://github.com/Subha-95/TSF.git
 # 
 # Problem statement : <u>What will be predicted score if a student studies for 9.25 hrs/ day?</u>
 # 
@@ -17,7 +17,7 @@
 
 # <h3><u><b>IMPORTING LIBRARIES</b></u></h3>
 
-# In[30]:
+# In[4]:
 
 
 import pandas as pd
@@ -30,26 +30,26 @@ get_ipython().run_line_magic('matplotlib', 'inline')
 
 # Data set link: https://raw.githubusercontent.com/AdiPersonalWorks/Random/master/student_scores%20-%20student_scores.csv
 
-# In[31]:
+# In[5]:
 
 
 train=pd.read_csv("https://raw.githubusercontent.com/AdiPersonalWorks/Random/master/student_scores%20-%20student_scores.csv")
 train.shape
 
 
-# In[32]:
+# In[6]:
 
 
 train.head(5)
 
 
-# In[33]:
+# In[7]:
 
 
 train.describe()
 
 
-# In[34]:
+# In[7]:
 
 
 train.info()
@@ -57,7 +57,7 @@ train.info()
 
 # <h3><u><b>DISTRIBUTION OF SCORES IN GIVEN DATASET</b></u></h3>
 
-# In[39]:
+# In[8]:
 
 
 train.plot(x="Hours", y="Scores",style="o")
@@ -71,7 +71,7 @@ plt.show()
 
 # <h3><u><b>TRAIN AND TEST DATA SPLIT</b></u></h3>
 
-# In[40]:
+# In[9]:
 
 
 x1 = train.iloc[:,0].values
@@ -83,14 +83,14 @@ y = y1.reshape(-1,1)
 # <h3><u><b>RANDOM LINEAR REGRESSION MODEL</b></u></h3>
 # <B>Applying on TEST data</B>
 
-# In[42]:
+# In[10]:
 
 
 from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2,random_state=0)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.3,random_state=0)
 
 
-# In[44]:
+# In[11]:
 
 
 from sklearn.linear_model import LinearRegression
@@ -98,7 +98,7 @@ linearRegressor= LinearRegression()
 linearRegressor.fit(x_train, y_train)
 
 
-# In[49]:
+# In[12]:
 
 
 line = linearRegressor.coef_*x+linearRegressor.intercept_
@@ -109,7 +109,7 @@ plt.show()
 
 # <h3><u><b>ACCURACY SCORE FROM TRAINING AND TEST DATA</b></u></h3>
 
-# In[52]:
+# In[13]:
 
 
 print('Test Score')
@@ -118,14 +118,14 @@ print('Training Score')
 print(linearRegressor.score(x_train, y_train))
 
 
-# In[54]:
+# In[14]:
 
 
-print(x_test) # Testing data - In Hours
+print(x_test)
 y_pred = linearRegressor.predict(x_test)
 
 
-# In[59]:
+# In[15]:
 
 
 df1 = pd.DataFrame({'Actual': y_test.flatten(), 'Predicted': y_pred.flatten()})
@@ -134,7 +134,7 @@ df1
 
 # <b>PREDICTION ON TEST AND TRAIN DATA</b>
 
-# In[61]:
+# In[16]:
 
 
 y_pred= linearRegressor.predict(x_test)
@@ -143,21 +143,15 @@ x_pred= linearRegressor.predict(x_train)
 
 # <h3><u><b>SOLLUTION OF PROBLEM STATEMENT</b></u></h3>
 
-# In[ ]:
+# In[17]:
 
 
-
-
-
-# In[63]:
-
-
-print('Score of student who studied for 9.25 hours a date', linearRegressor.predict([[9.25]]))
+print('Score of student who studied for 9.25 hours/day', linearRegressor.predict([[9.25]]))
 
 
 # <h3><u><b>SOLLUTION OF PROBLEM STATEMENT</b></u></h3>
 
-# In[70]:
+# In[19]:
 
 
 from sklearn.metrics import mean_absolute_error
@@ -166,4 +160,4 @@ print("Mean Absolute Error:", mean_absolute_error(y_test, y_pred))
 print("Mean Squared Error:", mean_squared_error(y_test, y_pred))
 
 
-# <h4><b><font color="green">AFTER BUILDING THE LINEAR REGRESSION MODEL AND OBTAIN THE PREDICTION WE CAN CONCLUDE "PREDICTED SCORE OF A STUDENT STUDIES WHO STUDY 9.25 HRS/ DAY WILL BE ABLE TO SCORE 93.69173249"</font></b></h4>
+# <blockquote><h4><b><font color="green">AFTER BUILDING THE LINEAR REGRESSION MODEL AND OBTAIN THE PREDICTION WE CAN CONCLUDE "PREDICTED SCORE OF A STUDENT STUDIES WHO STUDY 9.25 HRS/ DAY WILL BE ABLE TO SCORE 92.91505723"</font></b></h4> </blockquote>
